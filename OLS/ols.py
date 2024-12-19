@@ -17,6 +17,7 @@ class Setting:
     Research question: What is the effect of an agent's
     level of education on their wages? 
     """
+    num_obs: int
     # parameter
     beta: jnp.ndarray           # true parameter
     # outcome
@@ -71,9 +72,31 @@ def DGP(num_obs:int=100, seed:int=17)->Setting:
         + epsilon
     )
     _settings_dict = dict(
-        beta=_beta,wages=wages, education=education, experience=experience, gender=gender,
-        bads=bads, ability=ability, location=location)
+        num_obs=num_obs, beta=_beta,wages=wages, education=education, experience=experience,
+        gender=gender, bads=bads, ability=ability, location=location)
     
     return Setting(**_settings_dict) 
 
-controls = DGP(10)
+def matrix_OLS(data:Setting)->jnp.ndarray:
+    """Estimate OLS via matrix formulation"""
+
+    # form data matrix
+    constant = jnp.ones(shape=(data.num_obs, 1))
+    X = jnp.column_stack((
+        constant, 
+        data.education, 
+        data.experience, 
+        data.gender, 
+        data.bads, 
+        data.ability,
+        data.location
+    ))
+    y = data.wages.reshape(-1, 1)
+    
+    # predict parameter \hat{\beta} = (X^T X)^-1 X^T y
+    beta_hat = jnp.linalg.inv(X.T @ X) @ X.T @ y
+    
+    return beta_hat
+
+controls = DGP(100000)
+matrix_OLS(controls)
