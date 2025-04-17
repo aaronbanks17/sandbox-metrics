@@ -1,4 +1,4 @@
-name: sandbox 
+name: sandbox-metrics 
 channels:
   - conda-forge
 dependencies:

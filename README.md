@@ -1,6 +1,7 @@
 # Econometrics Sandbox
 
-Practice coding various estimators using JAX
+Practice coding various estimators and estimation algorithms using JAX.
+I appreciate any feedback on the code or errors spotted. 
 
 ## Setup and Installation (Unix Systems Only)
 The following provides the steps to get the code and data setup on your local machine. The instructions are for Unix-based systems (MacOS, Linux). 
