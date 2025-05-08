@@ -1,6 +1,6 @@
 # JAX Econometrics Sandbox
 
-Practice coding various estimators and estimation algorithms using JAX.
+Practice coding various estimators and econometric algorithms using JAX.
 I appreciate any feedback on the code or errors spotted. 
 
 ## Setup and Installation (Unix Systems Only)
